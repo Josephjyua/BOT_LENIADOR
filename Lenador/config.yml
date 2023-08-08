@@ -1,0 +1,110 @@
+
+directorio: '/Users/josep/OneDrive/Escritorio/BOT/Lenador'
+
+rutaRecoleccion: 'rutaAstrub'
+clase: 'Sadida' # Osamodas
+vueltas: 3
+cantidadMaderasPorVerificar: 4
+maderas:  # True si quieres que saque esa madera, False si no quieres
+  fresno: True
+  castano: True
+  nogal: True
+  roble: True
+  bombu: True
+  olivioleta: True
+totalMaderas: 28 # Cantidad de imagenes del protector de recursos
+cantidadImagenesPersonaje: 20 # en mi caso lo nombré como s + el número
+
+iconCandado:
+  x: 1506
+  y: 719
+
+iconDesactivarEspectador:
+  x: 1581
+  y: 714
+movimiento: True
+hechizos:
+  1: # temblor
+    x: 1252
+    y: 930
+  2: # viento envenenado
+    x: 1300
+    y: 930
+
+  3: # desechizar
+    x: 1302
+    y: 990
+
+  4: # sacrificada
+    x: 1248
+    y: 994
+
+  5: # zarza
+    x: 1405
+    y: 934
+
+unidadPorCuadro:
+  x: 48
+  y: 25
+
+finTurnoPos:
+  x: 1180
+  y: 996
+
+defaultPos:
+  x: 1000
+  y: 465
+
+dif: # diferencia entre el punto de apertura y el "talar"
+  x: 31
+  y: 51
+
+factor: # Diferencia entre cuadros al abrir el inventario del banco
+  x: 60
+  y: 60
+
+pocimaRecuerdoPos:
+  x: 1300
+  y: 936
+
+BanqueroPos:
+  x: 1156
+  y: 242
+
+hablarBanqueroPos:
+  x: 1194
+  y: 262
+
+consultarCajaPos:
+  x: 559
+  y: 464
+
+entradaBancoPos:
+  x: 1000
+  y: 297
+
+zappiPos:
+  x: 944
+  y: 293
+
+variosZappiPos:
+  x: 735
+  y: 160
+
+bancoZappiPos:
+  x: 693
+  y: 282
+
+iconRecursoBancoPos:
+  x: 1383
+  y: 241
+
+inventarioBancoPosInicial:
+  x: 1315
+  y: 345
+
+cerrarVentanaLvlUP_Pos:
+  x: 961
+  y: 464
+
+cantidadImagenesModoTactico: 1
