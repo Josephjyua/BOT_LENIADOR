@@ -18,10 +18,14 @@ class Vector2:
 pyautogui.FAILSAFE = False
 
 config = None
-with open(f'/Users/josep/OneDrive/Escritorio/BOT/Lenador/config.yml') as f:
+aConfig = r'\config.yml'
+aImage = r'\image'
+aRutas = r'\rutas'
+
+p = f'{os.path.dirname(__file__)}{aConfig}'
+with open(p) as f:
     config = yaml.safe_load(f)
 
-directorio = config['directorio']
 
 #hechizo
 
@@ -48,7 +52,7 @@ estado = 1
 turno = 0
 turnosDeEspera = 6
 def MiTurno():
-    logodir = f'{directorio}/image/logoCombate.png'
+    logodir = f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+'logoCombate.png'
     logoPos = pyautogui.locateCenterOnScreen(logodir,confidence = 0.6)
     if(logoPos != None):
         return True
@@ -57,7 +61,7 @@ def MiTurno():
     
 def ComenzarCombate():
     global estado
-    dir =f'{directorio}/image/listo.png'
+    dir =f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+'listo.png'
     pos = pyautogui.locateCenterOnScreen(dir,confidence = 0.8)
     if(pos != None):
         estado = 2
@@ -76,7 +80,7 @@ def ComenzarCombate():
     
 def ModoTactico():
         for i in range(config['cantidadImagenesModoTactico']):
-            dir =f'{directorio}/image/modoTactico{i+1}.png'
+            dir =f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+f'modoTactico{i+1}.png'
             pos = pyautogui.locateCenterOnScreen(dir,confidence = 0.8)
 
             if(pos != None):
@@ -98,7 +102,7 @@ def ComboSadida():
     global cdrCombo 
     if(turno >= turnosDeEspera and cdrCombo == 0):
         cdrCombo = 7
-        pDir =f'{directorio}/image/personajeIcon.png'
+        pDir =f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+'personajeIcon.png'
         pPos = pyautogui.locateCenterOnScreen(pDir,confidence = 0.8)
         # Temblor
         pyautogui.moveTo(config['hechizos'][1]['x'],config['hechizos'][1]['y'],duration=0.2)
@@ -141,11 +145,30 @@ def Zarza():
     # Lanzar zarza
     pyautogui.moveTo(config['hechizos'][5]['x'],config['hechizos'][5]['y'],duration=0.2)
     pyautogui.click()
+    time.sleep(0.5)
     if(GetPosMadera != None):
         pyautogui.moveTo(GetPosMadera().x,GetPosMadera().y,duration=0.2)
         pyautogui.click()
+    else:
+        
+        pPos = GetIconEnemy()
+        if(pPos !=None):
+            pyautogui.moveTo(pPos,duration=0.2)
+            pyautogui.click()
+
     time.sleep(0.4)
 
+
+def GetIconEnemy():
+        for i in range(config['enemyIconCantidad']):
+        
+            pDir =f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+f'enemyIcon{i+1}.png'
+            pPos = pyautogui.locateCenterOnScreen(pDir,confidence = 0.8)
+            if(pPos!=None):
+                return pPos
+            else:
+                return None
+        
 def FinTurno():
     # fin del turno
     time.sleep(1)
@@ -157,7 +180,7 @@ def GetPosMadera():
     global posMadera
     for i in range(config['totalMaderas']):
          
-        dir =f'{directorio}/image/m{i+1}.png'
+        dir =f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+f'm{i+1}.png'
         pos = pyautogui.locateCenterOnScreen(dir,confidence = 0.6)
 
         if(pos != None):
@@ -170,10 +193,10 @@ def GetPosMadera():
 def GetPosCharacter():
         v = Vector2()
         for i in range(config['cantidadImagenesPersonaje']):
-           p1Dir =f'{directorio}/image/s{i+1}.png'
+           p1Dir =f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+f's{i+1}.png'
            p1Pos = pyautogui.locateCenterOnScreen(p1Dir,confidence = 0.6)
            if(p1Pos != None):
-               img = cv2.imread(f'{directorio}/image/s{i+1}.png')
+               img = cv2.imread(f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+f's{i+1}.png')
                
                v.x = p1Pos.x
                v.y = p1Pos.y + (img.shape[1]/2)
@@ -232,14 +255,14 @@ def EntrarBanco():
     time.sleep(6)
 
 def IrABonta():
-    dir =f'{directorio}/image/pocimaBonta.png'
+    dir =f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+f'pocimaBonta.png'
     pos = pyautogui.locateCenterOnScreen(dir,confidence = 0.6)
     pyautogui.moveTo(pos)
     pyautogui.doubleClick()
     time.sleep(1)
 
 def TomarZaapi():
-    dir =f'{directorio}/image/zappi.png'
+    dir =f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+f'zappi.png'
     pos = pyautogui.locateCenterOnScreen(dir,confidence = 0.6)
     if(pos != None):
         pyautogui.moveTo(pos)
@@ -263,7 +286,7 @@ def TomarZaapi():
 def VerificarCombateFinalizado():
     global turno
     global estado
-    finDir = f'{directorio}/image/finCombate.png'
+    finDir = f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+'finCombate.png'
     finPos = pyautogui.locateCenterOnScreen(finDir,confidence = 0.6)
     if(finPos != None):
         turno = 0
@@ -362,8 +385,8 @@ def CheckMadera(m):
             print(m)
             for i in range(config['cantidadMaderasPorVerificar']):
 
-                dir =f'{directorio}/image/{m}{i+1}.png'
-                pos = pyautogui.locateCenterOnScreen(dir,confidence = 0.7)
+                dir =f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+f'{m}{i+1}.png'
+                pos = pyautogui.locateCenterOnScreen(dir,confidence = config['confidence'])
 
                 if(pos != None):
                     return pos
@@ -386,7 +409,7 @@ def Recolectar(m):
             time.sleep(0.1)
             pyautogui.moveTo(pos.x + config['dif']['x'],pos.y + config['dif']['y'])
             pyautogui.click()
-            time.sleep(2)
+            time.sleep(config['frecuenciaRecoleccion'])
         
         while(estado == 2):
             time.sleep(1)
@@ -396,8 +419,8 @@ def MoveTo(a,b):
     pyautogui.moveTo(a,b)
     time.sleep(0.3)
     pyautogui.doubleClick()
-    time.sleep(tiempoPuntoAPuntoMax)
-    time.sleep(3.5)
+    time.sleep(config['tiempoDeFase'])
+    
 
 def Ruta(ruta):
     
@@ -414,7 +437,7 @@ def Ruta(ruta):
 def LvlUp():
     while(True):
 
-        dir =f'{directorio}/image/lvlup.png'
+        dir =f'{os.path.dirname(__file__)}{aImage}'+ str(r'\ ').replace(" ","")+f'lvlup.png'
         pos = pyautogui.locateCenterOnScreen(dir,confidence = 0.8)
         if(pos != None):
             pyautogui.moveTo(961,464)
@@ -427,7 +450,7 @@ def LvlUp():
 
 def ReadYML(yml):
     r = []
-    with open(f'{directorio}/rutas/{yml}.yml') as f:
+    with open(f'{os.path.dirname(__file__)}{aRutas}'+ str(r'\ ').replace(" ","")+f'{yml}.yml') as f:
         data = yaml.safe_load(f)
 
     for i in data:
@@ -447,11 +470,12 @@ if __name__ == '__main__':
     hilo2.start()
 
     while(True): 
-  
+        
       for i in range(config['vueltas']):
             
         Ruta(ruta)
-        PocimaRecuerdo()
+        if(config['pocimaRecuerdoPorCiclo']):
+            PocimaRecuerdo()
 
       IrAlBanco()
       PocimaRecuerdo()

@@ -1,20 +1,23 @@
 
-directorio: '/Users/josep/OneDrive/Escritorio/BOT/Lenador'
-
 rutaRecoleccion: 'rutaAstrub'
 clase: 'Sadida' # Osamodas
-vueltas: 3
+vueltas: 5
 cantidadMaderasPorVerificar: 4
 maderas:  # True si quieres que saque esa madera, False si no quieres
   fresno: True
   castano: True
   nogal: True
   roble: True
-  bombu: True
-  olivioleta: True
-totalMaderas: 28 # Cantidad de imagenes del protector de recursos
+  bombu: False
+  olivioleta: False
+  arce: True
+totalMaderas: 33 # Cantidad de imagenes del protector de recursos
 cantidadImagenesPersonaje: 20 # en mi caso lo nombré como s + el número
-
+confidence: 0.7
+enemyIconCantidad: 1
+tiempoDeFase: 7
+frecuenciaRecoleccion: 2
+pocimaRecuerdoPorCiclo: True
 iconCandado:
   x: 1506
   y: 719
@@ -107,4 +110,4 @@ cerrarVentanaLvlUP_Pos:
   x: 961
   y: 464
 
-cantidadImagenesModoTactico: 1
+cantidadImagenesModoTactico: 2
